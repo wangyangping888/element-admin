@@ -1,16 +1,12 @@
 <template>
 
 	<el-container class="element-admin">
-		<el-aside width="200px">
-			
-				<Aside/>
-			
+		<el-aside :width="collapse?'64px':'200px'">
+			<Aside/>
 		</el-aside>
 		<el-container>
 			<el-header>
-				
-			
-				
+				<Header/>
 			</el-header>
 			<el-main>
 				<!-- 子路由出口   -->
@@ -23,17 +19,20 @@
 </template>
 
 <script>
-	
 	import Aside from "@/components/Aside";
-	
-	
-	export default{
-		components:{
-			Aside
+	import Header from "@/components/Header";
+
+	export default {
+		components: {
+			Aside,
+			Header
+		},
+		computed: {
+			collapse() {
+				return this.$store.state.collapse;
+			}
 		}
 	}
-	
-	
 </script>
 
 <style lang="less">
@@ -44,6 +43,7 @@
 		}
 		.el-aside {
 			background-color: #20222A;
+			transition: width 0.3s linear;
 		}
 		.el-header {
 			background-color: #fff;

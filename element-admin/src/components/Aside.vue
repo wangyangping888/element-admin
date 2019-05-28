@@ -1,14 +1,14 @@
 <template>
 
 	<el-menu default-active="/admin/button" :collapse="collapse" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#20222A" text-color="#fff" active-text-color="#3a8ee6">
-		<el-submenu index="1">
+		
+		<el-submenu :index="index" :key="index"  v-for="(item,index) in nav" >
 			<template slot="title">
-				<i class="el-icon-location"></i>
-				<span>Basic</span>
+				<i  :class="item.icon"></i>
+				<span v-text="item.title"></span>
 			</template>
 			<el-menu-item-group>
-				<el-menu-item index="/admin/button">按钮</el-menu-item>
-				<el-menu-item index="/admin/table">表格</el-menu-item>
+				<el-menu-item  :index="sub.path" v-for="(sub,inx) in item.items" > <i :class="sub.icon"></i> <span v-text="sub.title"></span>  </el-menu-item>
 			</el-menu-item-group>
 
 		</el-submenu>
@@ -19,6 +19,45 @@
 
 <script>
 	export default {
+		data() {
+			return {
+
+				nav: [{
+					title: 'Basic',
+					icon: 'el-icon-location',
+					items: [{
+						title: '按钮',
+						icon: '',
+						path: '/admin/button'
+					},{
+						title: '表格',
+						icon: '',
+						path: '/admin/table'
+					},{
+						title: '添加客户',
+						icon: '',
+						path: '/admin/addclient'
+					}]
+				},{
+					title: 'Form',
+					icon: 'el-icon-location',
+					items: [{
+						title: '单选',
+						icon: '',
+						path: '/admin/radio'
+					},{
+						title: '多选',
+						icon: '',
+						path: '/admin/checkbox'
+					},{
+						title: '输入框',
+						icon: '',
+						path: '/admin/input'
+					}]
+				}]
+
+			}
+		},
 		methods: {
 			handleOpen(key, keyPath) {
 				console.log(key, keyPath);
