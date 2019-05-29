@@ -7,6 +7,7 @@
 		<el-container>
 			<el-header>
 				<Header/>
+				<Tabs />
 			</el-header>
 			<el-main>
 				<!-- 子路由出口   -->
@@ -21,11 +22,13 @@
 <script>
 	import Aside from "@/components/Aside";
 	import Header from "@/components/Header";
+	import Tabs from "@/components/Tabs";
 
 	export default {
 		components: {
 			Aside,
-			Header
+			Header,
+			Tabs
 		},
 		computed: {
 			collapse() {
@@ -46,6 +49,7 @@
 			transition: width 0.3s linear;
 		}
 		.el-header {
+			height: 100px!important;
 			background-color: #fff;
 			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
 		}

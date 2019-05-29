@@ -2,7 +2,7 @@
 
 	<el-menu default-active="/admin/button" :collapse="collapse" class="el-menu-vertical-demo" @select="handleSelect" @open="handleOpen" @close="handleClose" background-color="#20222A" text-color="#fff" active-text-color="#3a8ee6">
 		
-		<el-submenu :index="index" :key="index"  v-for="(item,index) in nav" >
+		<el-submenu :index="index+''" :key="index"  v-for="(item,index) in nav" >
 			<template slot="title">
 				<i  :class="item.icon"></i>
 				<span v-text="item.title"></span>
@@ -66,7 +66,19 @@
 				console.log(key, keyPath);
 			},
 			handleSelect(path) {
-				this.$router.push(path);
+				this.$store.commit('addTabs',this.getTab(path));
+			},
+			// 根据path查找tab对象
+			getTab(path){
+				let tmp = null;
+				this.nav.forEach((item,index)=>{
+					 item.items.forEach((sub,inx)=>{
+					 	 if(sub.path==path){
+					 	 	tmp =  {...sub};
+					 	 }
+					 });
+				});
+				return tmp;
 			}
 		},
 		computed: {
